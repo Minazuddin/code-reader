@@ -1,0 +1,46 @@
+.container {
+    margin: calc((100vh - 500px) / 2) auto;
+    width: 70%;
+    height: 500px;
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+}
+
+body {
+    /* background-image: url('./assets/images/istockphoto-1271408351-170667a.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%; */
+    background-color: cyan;
+}
+
+.editor {
+    width: 50%;
+    height: 489px;
+    padding: 5px;
+    margin: 0;
+    resize: none;
+}
+
+.editor:focus {
+    outline: none;
+}
+
+.output {
+    width: 50%;
+    height: 479px;
+    padding: 5px;
+    background-color: black;
+    color: white;
+    font-family: monospace;
+}
+
+.play-icon-container {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    /* background-color: aliceblue; */
+    left: calc((100vw - 0.7 * 100vw) / 2 + 5px);
+    top: calc((100vh - 500px) / 2 - 30px);
+    cursor: pointer;
+}
