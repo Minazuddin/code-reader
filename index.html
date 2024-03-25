@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="style.css" rel="stylesheet" />
+    <script type="text/javascript" src="script.js" defer></script>
+    <title>CODE READER</title>
+  </head>
+  <body>
+    <div class="play-icon-container">
+        <img width="30px" src="./assets/images/play-button-icon-png-26.png" onclick="submitCode(event)" />
+    </div>
+    <div class="container">
+        <!--Input-->
+      <textarea class="editor" id="code" spellcheck="false" placeholder="Write some code!"></textarea>
+        <!--Output-->
+      <div class="output">
+          <pre id="code-output">YOUR OUTPUT HERE!</pre>
+      </div>
+    </div>
+  </body>
+</html>

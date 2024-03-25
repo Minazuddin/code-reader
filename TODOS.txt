@@ -1,9 +1,0 @@
-Input:
-
-function sum (a, b) {
-    let result; // undefined
-    result = a + b; //
-    return result;
-}
-
-sum()
