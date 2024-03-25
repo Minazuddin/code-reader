@@ -1,39 +1,47 @@
-const { exec } = require('child_process');
-const fs = require('fs');
-const cors = require('cors');
+// const http = require("http");
+// const app = require("./app");
+// const server = http.createServer(app);
+// const PORT = 3000;
+// server.listen(PORT, () => console.log(`server listening on port ${PORT}`));
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const app = express();
-const PORT = 3000;
+const repl = require('node:repl');
+const fs = require('node:fs');
+const { exec } = require('node:child_process');
+const { Readable, Writable, PassThrough } =  require('node:stream');
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
+const codeInput = `
+	global;
+`;
+let codeOutput = '';
 
-app.get('/', (req, res) => res.json({ success: true, message: 'TEST GET /' }))
+const prompt = 'custom-repl-server>';
 
-app.post('/exec-code', (req, res) => {
-    const data = req.body;
+const inputTunnel = new PassThrough();
+inputTunnel.write(codeInput);
 
-    fs.writeFile('code.js', data.code, 'utf-8', (err) => {
-        if (err) {
-            return res.json({ success: false, message: err });
-        }
-        
-        exec('node code.js', (error, stdout, stderr) => {
-            if (error) {
-                console.log(`error: ${error.message}`)
-                return res.json({ success: false, message: error });
-            }
-            if (stderr) {
-                console.log(`stderror: ${stderr.message}`)
-                return res.json({ success: false, message: stderr });
-            }
-            console.log(`stdout: ${stdout}`)
-            return res.json({ success: true, message: 'executed successfully!', output: stdout });
-        })
-     })
+const outputTunnel = new PassThrough();
+
+const replServer = repl.start({
+	prompt,
+	input: inputTunnel,
+	output: outputTunnel
+});
+
+outputTunnel.on('data', chunk => {
+	replServer.resume();
+	if (chunk.toString() == prompt) return;
+	codeOutput = chunk;
 })
 
-app.listen(PORT, () => console.log('server listening to port ', PORT))
+replServer.on('SIGTSTP', () => {
+	console.log('repl server paused');
+});
+
+replServer.on('exit', () => {
+	console.log('Exiting REPL Session');
+	console.log('code output:', codeOutput);
+	inputTunnel.write(codeInput);
+});
+
+replServer.on('error', err => console.error(err))
+

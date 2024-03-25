@@ -1,0 +1,46 @@
+Example:
+---------
+
+const sum = (a, b) => {
+	console.log(a, b);
+	return a + b;
+}
+
+const diff = (a, b) => {
+	console.log(a, b);
+	return a - b;
+}
+
+let a = 20, b = 10;
+
+sum(a, b);
+
+diff(a, b);
+
+
+Insert console.log statement after each variable declaration or definition
+------------------------------------------------------------------------------
+
+1) Find Function call: sum(10, 20);
+
+2) Find the corresponding Function declaration: const sum = (a, b) => {
+	/**
+	* a: 10
+	* b: 20
+	*/
+	console.log("a", a);
+	console.log("b", b);
+	return a + b;
+};
+
+3) Find the params name
+
+4) Insert console.log statement after each variable declaration or definition;
+
+5) Go back to function call and insert console.log(Fn)
+
+6) Execute the code 
+
+Regex 
+
+for finding all function names - /(?<!.)\w*(?=\((.*)[;])/g

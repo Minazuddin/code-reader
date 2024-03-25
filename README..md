@@ -1,6 +1,6 @@
-CODE READER
+# CODE READER
 
-Introduction:
+# Introduction:
 
 The main theme of this project  is to make the devs visualize their data while writing code to build logics.
 
@@ -18,7 +18,7 @@ const findDifferenceBetweenDates = (date1) => {
 	date1 = new Date(date1);
 	const currentDate = new Date();
 	
-	// logic for finding diffference in time and date 
+	// logic for finding difference in time and date 
 }
 {<>}
 
@@ -33,7 +33,7 @@ once the above code is sent for execution, the output from the server would be l
 [resultDate]	[object]	[props of object]
 
 
-Algorithm:
+# Algorithm:
 
 1. Compile the code using nodejs
 
